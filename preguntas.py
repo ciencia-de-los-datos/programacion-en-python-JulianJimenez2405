@@ -11,9 +11,6 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 
 """
-from statistics import linear_regression
-
-
 
 
 def pregunta_01():
@@ -29,7 +26,6 @@ def pregunta_01():
         lista_datos = file.readlines()    
 
     suma = 0
-    
 
     for valores in lista_datos:
         valores_temporales = valores.split()
