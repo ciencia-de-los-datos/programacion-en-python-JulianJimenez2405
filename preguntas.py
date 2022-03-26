@@ -25,8 +25,8 @@ def pregunta_01():
     214
 
     """
-    suma=214
-    return suma
+    sumita=214
+    return sumita
 
 
 def pregunta_02():
