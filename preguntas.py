@@ -29,6 +29,7 @@ def pregunta_01():
         lista_datos = file.readlines()    
 
     suma = 0
+    
 
     for valores in lista_datos:
         valores_temporales = valores.split()
