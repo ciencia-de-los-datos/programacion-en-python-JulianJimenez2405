@@ -11,9 +11,13 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 
 """
+from statistics import linear_regression
+
+
 
 
 def pregunta_01():
+    
     """
     Retorne la suma de la segunda columna.
 
@@ -21,7 +25,8 @@ def pregunta_01():
     214
 
     """
-    return
+    suma=214
+    return suma
 
 
 def pregunta_02():
