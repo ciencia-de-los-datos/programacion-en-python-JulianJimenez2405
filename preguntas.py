@@ -67,7 +67,18 @@ def pregunta_03():
     ]
 
     """
-    return
+    with open("data.csv", "r") as data:
+        data=open('data.csv', 'r').readlines()
+        data=[i.replace('\n', '') for i in data]
+        data=[i.split('\t') for i in data]
+
+    diccionario={}
+    for i in data:
+        if i[0] not in list(diccionario.keys()):
+            diccionario[i[0]]=int(i[1]) #key=valor
+        elif i[0] in list(diccionario.keys()):
+           diccionario[i[0]]+=int(i[1])
+    return sorted(list(diccionario.items()))
 
 
 def pregunta_04():
