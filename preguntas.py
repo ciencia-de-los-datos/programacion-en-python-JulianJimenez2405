@@ -49,7 +49,23 @@ def pregunta_02():
     ]
 
     """
-    return
+    from operator import itemgetter
+    from string import whitespace
+
+    with open("data.csv", "r") as data:
+        data=open('data.csv', 'r').readlines()
+    data = [row[0] for row in data]
+
+    result=dict()
+    for letra in data:
+        if letra in result.keys():
+            result[letra]=result[letra] + 1
+        else:
+            result[letra] = 1
+
+    tuplas=[(key,valor) for key, valor in result.items()]
+    tuplas=sorted(tuplas,key=itemgetter(0),reverse=False)
+    return tuplas
 
 
 def pregunta_03():
@@ -103,7 +119,16 @@ def pregunta_04():
     ]
 
     """
-    return
+    from collections import Counter
+    import csv
+    with open('data.csv', 'r', newline='') as data:
+        data_reader=csv.reader(data, delimiter='\t')
+        list_data=list(data_reader)
+        lista=[]
+        length=len(list_data)
+        for i in range(length):
+            lista.append(list_data[i][2][5:7])
+    return(sorted(Counter(lista).most_common(len(lista))))
 
 
 def pregunta_05():
@@ -121,7 +146,23 @@ def pregunta_05():
     ]
 
     """
-    return
+    from operator import itemgetter
+    with open('data.csv', 'r') as data:
+        data_reader=data.readlines()
+        data_reader=[row.split('\t') for row in data_reader]
+        data_reader=[row[:2] for row in data_reader]
+    
+        diccionario={}
+        for letra, valor in data_reader:
+            valor=int(valor)
+            if letra in diccionario.keys():
+                diccionario[letra].append(valor)
+            else:
+                diccionario [letra] = [valor]
+            
+        diccionario = [(key, max(valor), min(valor)) for key, valor in diccionario.items()]
+        diccionario = sorted(diccionario, key=itemgetter(0), reverse=False)
+    return(diccionario)
 
 
 def pregunta_06():
@@ -146,7 +187,34 @@ def pregunta_06():
     ]
 
     """
-    return
+    import csv
+    datos = open('data.csv')
+    csvreader=csv.reader(datos)
+    lista_1=[]
+    lista_2=[]
+    lista_3=[]
+    lista_4=[]
+    lista_5=[]
+    for row in csvreader:
+        lista_1.append(row[2:])
+    for valores in lista_1:
+        for data in valores:
+            lista_2.append(data.split("\t"))
+    for valores in lista_2:
+        for data in valores:
+            if len(data)>1:
+                if data[:3] not in lista_3:
+                    lista_3.append(data[:3])
+    for data in lista_3:
+        numeros=[]
+        for valores in lista_2:
+            for datos in valores:
+                if data in datos:
+                    numeros.append(int(datos[4:]))
+        lista_4.append(max(numeros))
+        lista_5.append(min(numeros))
+        tupla=sorted(zip(lista_3,lista_5,lista_4))
+    return(tupla)
 
 
 def pregunta_07():
