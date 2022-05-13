@@ -238,7 +238,23 @@ def pregunta_07():
     ]
 
     """
-    return
+    with open("data.csv", "r") as data:
+        data=open('data.csv', 'r').readlines()
+        data=[i.replace('\n', '') for i in data]
+        data=[i.split('\t') for i in data]
+
+    letras=([z[0] for z in data])
+    num=list(set([z[1] for z in data]))
+    num.sort()
+    numyletra=[]
+    for n in num:
+        lista=[]
+        for element in data:
+            if element[1] == n:
+                lista.append(element[0])
+        tupla=(int(n),(lista))
+        numyletra=numyletra+[tupla]
+    return(numyletra)
 
 
 def pregunta_08():
@@ -263,7 +279,21 @@ def pregunta_08():
     ]
 
     """
-    return
+    with open("data.csv", "r") as data:
+        data=open('data.csv', 'r').readlines()
+        data=[i.replace('\n', '') for i in data]
+        data=[i.split('\t') for i in data]
+
+    dic=dict()
+    for i in data:
+        if int(i[1]) not in dic.keys():
+            dic[int(i[1])]=[i[0]]
+        else:
+            dic[int(i[1])].append(i[0])
+        
+    result = sorted(list(dic.items()))
+    result = [(j[0], sorted(set(j[1]))) for j in result]
+    return(result)
 
 
 def pregunta_09():
@@ -286,7 +316,27 @@ def pregunta_09():
     }
 
     """
-    return
+    with open("data.csv", "r") as data:
+        data=open('data.csv', 'r').readlines()
+        data=[i.replace('\n', '') for i in data]
+        data=[i.split('\t') for i in data]
+
+    columna=[(z[4].split(',')) for z in data]
+    lista=[]
+    for key in range(0, len(columna)):
+        for element in range(0, len(columna[key])):
+            lista.append([(columna[key][element][:3])])
+    claves=list(set([z[0] for z in lista]))
+    claves.sort()
+    dic={}
+    for clave2 in claves:
+        contador=0
+        for par in lista:
+            if par[0] == clave2:
+                contador=contador+1
+        diccionario={clave2:contador}
+        dic.update(diccionario)
+    return(dic)
 
 
 def pregunta_10():
@@ -307,7 +357,15 @@ def pregunta_10():
 
 
     """
-    return
+    with open("data.csv", "r") as data:
+        data=open('data.csv', 'r').readlines()
+        data=[i.replace('\n', '') for i in data]
+        data=[i.split('\t') for i in data]
+
+    result=[]
+    for elemento in data:
+        result.append((elemento[0],len(elemento[3].split(',')),len(elemento[4].split(','))))
+    return(result)
 
 
 def pregunta_11():
@@ -328,6 +386,28 @@ def pregunta_11():
 
 
     """
+    with open("data.csv", "r") as data:
+        data=open('data.csv', 'r').readlines()
+        data=[i.replace('\n', '') for i in data]
+        data=[i.split('\t') for i in data]
+
+    columna2=[z[3].split(',') for z in data]
+    pares=[]
+    for clave in columna2:
+        pares=pares+clave
+    claves=list(set(pares))
+    claves.sort()
+    columna=[(z[3].split(','),z[1]) for z in data]
+    diccionario={}
+    for clave in claves:
+        suma=0
+        for element in columna:
+            for letra in element[0]:
+                if letra == clave:
+                    suma=suma+int(element[1])
+        dic={clave:suma}
+        diccionario.update(dic)
+    return(diccionario)
     return
 
 
@@ -346,4 +426,20 @@ def pregunta_12():
     }
 
     """
-    return
+    with open("data.csv", "r") as data:
+        data=open('data.csv', 'r').readlines()
+        data=[i.replace('\n', '') for i in data]
+        data=[i.split('\t') for i in data]
+
+    letras=list(set([z[0] for z in data]))
+    letras.sort()
+    columna=[(z[0],sum([int(x[4:]) for x in z[4].split(',')])) for z in data]
+    diccionario={}
+    for letra in letras:
+        suma=0
+        for element in columna:
+            if element[0] == letra:
+                suma=suma+element[1]
+        dic={letra:suma}
+        diccionario.update(dic)
+    return(diccionario)
